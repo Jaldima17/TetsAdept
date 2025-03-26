@@ -13,12 +13,23 @@ int main()
 {
 	std::vector<Objects> objs;
 
-	std::cout << "Enter file name: ";
-	std::string nameFile;
-	std::cin >> nameFile;
-
-	FileReader reader(nameFile);
-	objs = reader.read();
+	bool opened = false;
+	while (!opened)
+	{
+		try
+		{
+			std::cout << "Enter file name: ";
+			std::string nameFile;
+			std::cin >> nameFile;
+			FileReader reader(nameFile);
+			objs = reader.read();
+			opened = true;
+		}
+		catch (...)
+		{
+			std::cout << "Incorrect file, try again" << std::endl;
+		}
+	}
 
 	std::cout << "Enter database name: ";
 	std::string nameBD;
@@ -82,6 +93,8 @@ int main()
 	std::cout << "groupByDistanseBd.txt" << " " << "groupByDistanseAlg.txt" << std::endl;
 	std::cout << "groupByNameBd.txt" << " " << "groupByNameAlg.txt" << std::endl;
 	std::cout << "groupByTypeBd.txt" << " " << "groupByTypeAlg.txt" << std::endl;
+
 	system("pause");
+
 	return 0;
 }
